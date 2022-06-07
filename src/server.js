@@ -14,7 +14,11 @@ mongoose.connect(process.env.MONGO_URL, (err) => {
 //route setup
 const router = require("./routes/routeHandler");
 const { API_ENDPOINT_CONFIG } = require("./constants/ApiConfig");
+const globalErrorHandler = require("./controllers/ErrorController");
 app.use(API_ENDPOINT_CONFIG.BASE_END_POINT, router);
+
+///global error handler
+app.use(globalErrorHandler);
 
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => {
